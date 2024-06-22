@@ -25,20 +25,22 @@ class ProductInventorySerializer(serializers.HyperlinkedModelSerializer):
 
 
 class OrderProductQuantitySerializer(serializers.HyperlinkedModelSerializer):
-    product = ProductSerializer()
+    product = ProductSerializer(read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(source='product', queryset=Product.objects.all(), write_only=True)
 
     class Meta:
         model = OrderProductQuantity
-        fields = ['product', 'quantity']
+        fields = ['product', 'product_id', 'quantity']
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.SerializerMethodField()
+    user = UserSerializer(read_only=True)
+    user_id = serializers.PrimaryKeyRelatedField(source='user', queryset=User.objects.all(), write_only=True)
     product_quantities = OrderProductQuantitySerializer(many=True)
 
     class Meta:
         model = Order
-        fields = ['user', 'order_date', 'product_quantities']
+        fields = ['user', 'user_id', 'order_date', 'product_quantities']
 
     def create(self, validated_data):
         product_quantities_data = validated_data.pop('product_quantities')
@@ -50,10 +52,3 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
             product.stock -= quantity
             product.save()
         return order
-
-    def get_user(self, obj):
-        if self.context.get('request').method == 'GET':
-            return UserSerializer(obj.user).data
-        # Use PrimaryKeyRelatedField for POST requests so we only have to provide an ID
-        return obj.user.id
-
