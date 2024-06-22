@@ -73,7 +73,8 @@ For improved security (including token expiry), a third party package such as Dj
 
 ## Deployment
 
-
+This API could be deployed to an AWS Elastic Beanstalk environment. EB automates the process of deployment, capacity 
+provisioning, load balancing and automatic scaling. There are many tutorials available online.
 
 ## Third party docs/links
 
@@ -82,3 +83,4 @@ For improved security (including token expiry), a third party package such as Dj
 * [Django REST Framework](https://www.django-rest-framework.org/)
 * [Django REST Knox](https://github.com/jazzband/django-rest-knox)
 * [Collaborating in Postman](https://learning.postman.com/docs/collaborating-in-postman/collaborate-in-postman-overview/)
+* [Deploying a Django app to EB](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-django.html)
