@@ -18,13 +18,16 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
-        fields = ['name', 'price']
+        fields = ['id', 'name', 'price']
 
 
 class ProductInventorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
-        fields = ['name', 'price', 'stock']
+        fields = ['url', 'id', 'name', 'price', 'stock']
+        extra_kwargs = {
+            'url': {'view_name': 'product-detail', 'lookup_field': 'pk'}
+        }
 
 
 class OrderProductQuantitySerializer(serializers.HyperlinkedModelSerializer):
@@ -36,10 +39,10 @@ class OrderProductQuantitySerializer(serializers.HyperlinkedModelSerializer):
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
-    order_product_quantity = OrderProductQuantitySerializer()
+    product_quantities = OrderProductQuantitySerializer(many=True)
 
     class Meta:
         model = Order
-        fields = ['order_date', 'order_product_quantity']
+        fields = ['order_date', 'product_quantities']
 
 

@@ -24,7 +24,7 @@ class Order(models.Model):
 
 
 class OrderProductQuantity(models.Model):
-    order = models.ForeignKey(Order, models.RESTRICT, related_name='productQuantities')
+    order = models.ForeignKey(Order, models.RESTRICT, related_name='product_quantities')
     product = models.ForeignKey(Product, models.RESTRICT)
     quantity = models.IntegerField(validators=[MinValueValidator(1)])
 
