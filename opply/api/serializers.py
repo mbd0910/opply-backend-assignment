@@ -21,6 +21,12 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['name', 'price']
 
 
+class ProductInventorySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['name', 'price', 'stock']
+
+
 class OrderProductQuantitySerializer(serializers.HyperlinkedModelSerializer):
     product = ProductSerializer()
 
