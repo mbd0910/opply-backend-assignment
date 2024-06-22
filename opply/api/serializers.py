@@ -10,12 +10,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Basic product serializer without stock count - used when we want to return the products in an order without
+    including current stock levels.
+    """
     class Meta:
         model = Product
         fields = ['id', 'name', 'price']
 
 
 class ProductInventorySerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Separate serializer when browsing the product inventory as we want to return how many products are in stock.
+    """
     class Meta:
         model = Product
         fields = ['url', 'id', 'name', 'price', 'stock']

@@ -21,6 +21,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
 
         product_quantities = serializer.validated_data['product_quantities']
+        # Only accept an order if the requested quantity of every product is in stock
         for product_quantity in product_quantities:
             product = product_quantity['product']
             quantity = product_quantity['quantity']

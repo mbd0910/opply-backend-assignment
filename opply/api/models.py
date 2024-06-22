@@ -17,6 +17,10 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+    """
+    Orders consist of many OrderProductQuantities - a product/quantity combination to support ordering multiple units of
+    the same product.
+    """
     user = models.ForeignKey(User, models.RESTRICT)
     order_date = models.DateTimeField(auto_now_add=True)
 
@@ -26,6 +30,10 @@ class Order(models.Model):
 
 
 class OrderProductQuantity(models.Model):
+    """
+    Product/quantity combination. Quantity must be greater than or equal to one, and each combination is related to an
+    order. Order/product is unique so we can be certain of the quantity ordered.
+    """
     order = models.ForeignKey(Order, models.RESTRICT, related_name='product_quantities')
     product = models.ForeignKey(Product, models.RESTRICT)
     quantity = models.IntegerField(validators=[MinValueValidator(1)])
