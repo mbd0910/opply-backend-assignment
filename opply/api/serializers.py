@@ -26,6 +26,7 @@ class ProductInventorySerializer(serializers.HyperlinkedModelSerializer):
 
 class OrderProductQuantitySerializer(serializers.HyperlinkedModelSerializer):
     product = ProductSerializer(read_only=True)
+    # For writes (POST requests), only require the product ID
     product_id = serializers.PrimaryKeyRelatedField(source='product', queryset=Product.objects.all(), write_only=True)
 
     class Meta:
@@ -35,6 +36,7 @@ class OrderProductQuantitySerializer(serializers.HyperlinkedModelSerializer):
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
     user = UserSerializer(read_only=True)
+    # For writes (POST requests), only require the user ID
     user_id = serializers.PrimaryKeyRelatedField(source='user', queryset=User.objects.all(), write_only=True)
     product_quantities = OrderProductQuantitySerializer(many=True)
 

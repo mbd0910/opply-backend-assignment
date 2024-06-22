@@ -12,6 +12,7 @@ class Product(models.Model):
         return self.name
 
     class Meta:
+        ordering = ['name']
         db_table = 'products'
 
 
@@ -20,6 +21,7 @@ class Order(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        ordering = ['-order_date']
         db_table = 'orders'
 
 

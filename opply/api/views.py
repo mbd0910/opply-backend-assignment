@@ -1,4 +1,3 @@
-from django.contrib.auth.models import Group, User
 from opply.api.models import Product, Order
 from rest_framework import viewsets, status
 from rest_framework.response import Response
