@@ -23,7 +23,36 @@ A Django management command has been included to populate the database with samp
 docker-compose exec web python manage.py sample_db
 ```
 
+### Browser exploration
 
+You can browse the API in a browser by visiting http://0.0.0.0:8000. You'll need to login using a user's credentials 
+which you can find in [sample_db.py](opply/api/management/commands/sample_db.py).
+
+## Endpoints
+
+* `POST /api-token-auth/` Exchange username and password for an authentication token.
+* `GET /products/` Paginated list of products, including stock levels.
+* `GET /orders/` Paginated list of orders for currently logged in user, sorted by order date.
+* `POST /orders/` Submit order of products, specifying quantity of each product required.
+
+Example request body:
+
+```json
+{
+  "user_id": 1,
+  "product_quantities": [
+    {
+      "product_id": 2,
+      "quantity": 5
+    },
+    {
+      "product_id": 10,
+      "quantity": 18
+    }
+  ]
+}
+
+```
 
 ## Next steps/future improvements
 
