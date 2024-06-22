@@ -6,7 +6,7 @@ from opply.api import views
 
 router = routers.DefaultRouter()
 router.register(r'products', views.ProductViewSet)
-router.register(r'orders', views.OrderViewSet)
+router.register(r'orders', views.OrderViewSet, basename='order')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
