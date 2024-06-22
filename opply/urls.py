@@ -4,8 +4,6 @@ from rest_framework import routers
 from opply.api import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
 router.register(r'products', views.ProductViewSet)
 router.register(r'orders', views.OrderViewSet)
 
