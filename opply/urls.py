@@ -8,8 +8,8 @@ router = routers.DefaultRouter()
 router.register(r'products', views.ProductViewSet)
 router.register(r'orders', views.OrderViewSet, basename='order')
 
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
+# Provide session-based authentication using api-auth, including the login/logout views provided by DRF
+# Provide token-based authentication to fulfill assignment requirements
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
